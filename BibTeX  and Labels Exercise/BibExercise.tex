@@ -1,0 +1,231 @@
+\documentclass[10pt]{article}
+\usepackage[alphabetic]{amsrefs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{xy}
+
+\newtheorem{Theorem}{Theorem}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Example}[Theorem]{Example}
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\End}{PGL}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\aut}{rank}
+\DeclareMathOperator{\card}{card}
+
+
+
+
+\numberwithin{Theorem}{section}
+
+
+\title{PMAT 613: Non-algebraic Kaplansky Fields}
+\author{Geoff Vooys}
+\date{January 23, 2015}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Whatnot}
+
+\begin{Definition}
+Let $L/K$ be a field extension with $\alpha: K \hookrightarrow L$ the monomorphism of fields. Then $L/K$ is Kaplansky if
+\[
+ L^{\aut(L/K)} = \alpha(K) \cong K. 
+\]
+\end{Definition}
+Some authors write that these field extensions are \emph{Galois}; see \cite{Hungerford}, for example. Instead, we say that $L/K$ is Galois if it is Kaplansky and algebraic. These are two fundamentally different notions, as these arguments will show.
+\begin{Definition}
+A field extension $L/K$ is said to be transcendental if at least one element of $L$ is transcendental over $K$, i.e., for some $u \in L$ there exists no non-zero polynomial $f \in K[x]$ such that $f(u) = 0$.
+\end{Definition} 
+\begin{example}
+The field $\R$ is transcendental over $\Q$ because, amongst infinitely many other examples, both $\pi$ and $e$ are transcendental over $\Q$.
+\end{example}
+\begin{example}
+Let $K$ be any field and $t$ an indeterminate over $K$. Then $K(t)/K$ is transcendental.
+\end{example}
+\indent This is the main theorem of these notes; the whole point is to prove that we can find infinitely many examples of fields that are Kaplansky and not Galois!
+\begin{Theorem}
+Let $K$ be any infinite field. Then $K(t)/K$ is Kaplansky.
+\end{Theorem}
+We omit the proof to the next section, as to prove this in complete generality we must first prove a series of lemmas. Let's do this now.
+
+\section{The (Many) Lemmas}
+\begin{Lemma}[\cite{Hungerford}, Exercise V.2.6.a, p. 255-256]
+Let $K$ be any field and let $t$ be an indeterminant over $K$, $f(t)/g(t) \in K(t)$ with $f(t)/g(t) \notin K$ and $f(t), g(t) \in K[t]$ relatively prime (we shall write $\gcd_{K[t]}(f,g)=1$ to denote this from now on). Then $t$ is algebraic over $K(f(t)/g(t))=K(f/g)$ and $[K(t):K(f/g)] = \max\lbrace \deg(f), \deg(g) \rbrace$. 
+\end{Lemma}
+\begin{proof}
+Begin by letting $\phi(y) \in K(f/g)[y]$ be defined by
+$$ \phi(y) := \left(\frac{f(t)}{g(t)}\right)g(y) - f(y).$$
+Then we see that $\phi(y)$ is not identically zero in $K(f/g)[y]$ while
+$$\phi(t) = \left(\frac{f(t)}{g(t)}\right)g(t) - f(t) = f(t) - f(t) = 0,$$
+whence $t$ is an algebraic element over $K(f/g)$. In order to see that $K(t)/K(f/g)$ is algebraic, it is sufficient to see that $\phi(y)$ is irreducible over $K(f/g)[y]$ and that $K(f/g)/K$ is transcendental. 
+
+The fact that $K(f/g)/K$ is transcendental is given by the fact that $f(t)/g(t) \in K(t)$ but $f/g \notin K$. This shows that at least $f(t)$ or $g(t)$ satisfy $\deg(f) \geq 1$ or $\deg(g) \geq 1$. Now, since $t$ is an indeterminant over $K$, it follows that there is no non-zero polynomial $h(t) \in K[t]$ such that $h(f(t)/g(t)) = 0$.
+
+Now having established that $K(f/g)/K$ is transcendental, we must show that $K(t)/K(f/g)$ algebraic. Since $f(t)/g(t)$ is transcendental over $K$, write $z := f(t)/g(t)$. Thus we may treat $\phi(y)$ instead as a polynomial with $\phi(y) \in K(z)[y]$
+$$ \phi(y) := zg(y) - f(y).$$
+It now follows that $\phi(y)$  is irreducible in $K(z)[y]$ if and only if $\phi(z,y)$ is irreducible in $K[z][y]$. 
+
+Since $\phi(z,y)$ is linear in $z$, it is $z$-irreducible, and as such we need only verify that $\phi$ is irreducible in $y$. To see this consider that $\gcd_{K[t]}(f(t),g(t)) = 1$. Because $f$ and $g$ are coprime polynomials of a single indeterminate, there is no non-trivial factor of $f$ and $g$. As such, it follows that $f$ and $g$ cannot decomposed in $y$ and so $\phi(z,y)$ is irreducible. This shows that $K(t)/K(f/g)$ is algebraic. The fact that \\ $[K(t):K(f/g)] = \max\lbrace\deg(f),\deg(g)\rbrace$ is clear, and hence the lemma is proved.
+\end{proof}
+\begin{Lemma}[\cite{Hungerford}, Exercise V.2.6.b, p. 256] 
+Let $K(t)/L/K$ be a tower of fields with $L \ne K$.Then $[K(t):L] \in \N$.
+\end{Lemma}
+\begin{proof}
+We begin the proof of this lemma by showing that $L$ is not algebraic over $K$ through a contradiction. If $L/K$ were algebraic then we could find an isomorphism in $\mathbf{Cring}$ that takes the form
+$$ L \cong \frac{K[x]}{(f)} $$
+for some irreducible $f \in K[x]$ with $\deg(f) \geq 2$. Then since $K(t)/L/K$ is a tower of fields, we could find some monomorphism $\alpha:L \to K(t)$; in particular, this implies the commutative diagram
+\begin{displaymath}
+\xymatrix{
+L \ar[rr]^{\alpha} & & K(t) \\
+ & K \ar[ur]^{\iota_{t}} \ar[ul]_{\iota_{L}} &
+}
+\end{displaymath}
+over $\mathbf{Field}$. However, since $K(t)/K$ is a purely transcendental extension, the only way that the above diagram commutes is if $\iota_L \in \aut_{\mathbf{Field}}(K)$, a contradiction on $L \ne K$. This shows that $L/K$ is not algebraic.
+
+Since $L/K$ is not algebraic, it is transcendental. Because $K(t)/L/K$ is a tower of fields and $K(t)$ is a transcendental extension in exactly one indeterminate, this then forces $L$ to be a subfield of $K(t)$. Since $L$ is a subfield of the field of rational polynomials in $t$, it follows that there is an isomorphism of the form
+$$ L \cong K(f(t)/g(t))$$
+for $f(t), g(t) \in K[t]$ and $f/g \notin K$; WOLOG we can take $\gcd_{K[t]}(f,g) = 1$. By Lemma \ref{Lemma 1} we then have that $$[K:L] = [K(t):K(f/g)]=\max\lbrace \deg(f), \deg(g) \rbrace \in \N.$$
+Because $[K(t):L]$ is finite, $K(t)/L$ is algebraic, and we are done.
+\end{proof}
+\begin{Lemma}[\cite{Hungerford}, Exercise V.2.6.c, p. 256] 
+Let $\sigma:K(t) \to K(t)$ be given by, for $f,g \in K[t]$ coprime,
+$$ t \mapsto \frac{f(t)}{g(t)}.$$
+Then $\sigma \in \End_{\mathbf{Cring}}(K(t))$ such that for all $\phi(t), \psi(t) \in K[t]$,
+$$ \sigma\left(\frac{\phi(t)}{\psi(t)}\right) = \frac{\phi(f(t)/g(t)}{\psi(f(t)/g(t))}.$$
+Moreover, $\sigma \in \aut(K(t)/K)$ if and only if $\max\lbrace\deg(f),\deg(g)\rbrace = 1$.
+\end{Lemma}
+\begin{proof}
+The fact that $\sigma$ is an endomorphism of crings with the desired property on polynomials $\phi, \psi \in K[t]$ is clear; it is given by a routine verification that holds precisely because $\gcd_{K[t]}(f,g)=1$. As such, we need only prove the if and only if assertion. 
+
+$\implies$: Assume that $\sigma \in \aut(K(t)/K)$. Because $\sigma$ is an automorphism (and hence an endomorphism) of $K(t)$, we have the tower of fields
+$$ K(t)/\sigma(K(t))/K$$
+with $\sigma(K(t)) \cong K(f/g)$. The extension $K(t)/K(f/g)$ is algebraic by Lemma \ref{Lemma 1}. Since $K(t) \cong K(f/g)$ through $\sigma$ we find that, again by Lemma \ref{Lemma 1},
+$$ \max\lbrace\deg(f),\deg(g)\rbrace = [K:K(t)] = 1,$$
+proving the $\implies$ direction.
+
+$\impliedby$: Assume that $\max\lbrace \deg(f), \deg(g)\rbrace = 1$. 
+By the first result of the lemma, we have that $\sigma:K(t) \to K(f/g) \cong \sigma(K(t))$ is a surjective homomorphism of crings. By Lemma \ref{Lemma 1} $K(t)/K(f/g)$ is algebraic with $[K(t):K(f/g)] = \max\lbrace \deg(f),\deg(g)\rbrace = 1$. As such, we may treat $K(t)$ as a $K(f/g)$ vector space. Now, through this structure it follows that $\sigma$ then induces the $K(f/g)$-linear map
+$$ K(t) \to K(f/g)$$
+of $K(f/g)$ vector spaces. Because $[K(t):K(f/g)] = \max\lbrace \deg(f),\deg(g)\rbrace = 1$, $K(t)$ is a one-dimensional $K(f/g)$ vector space and hence through $\sigma$ there is an isomorphism of fields $K(t) \cong K(f/g)$. This shows that $\sigma \in \aut(K(t)/K)$ and hence completes the proof.
+\end{proof}
+
+\begin{Lemma}[\cite{Hungerford}, Exercise V.2.6.d, p. 256]
+Any $\sigma \in \aut(K(t)/K)$ takes the form
+$$ t \mapsto \frac{at + b}{ct + d}$$
+for $a,b,c,d \in K$ such that $ad - bc \ne 0$ (note the relationship here with $\PGL_2(K)$).
+\end{Lemma}
+\begin{proof}
+Begin by considering the fractional linear transformation, for $a,b,c,d \in K$ with $ad - bc \ne 0$,
+$$ t \mapsto \frac{at + b}{ct + d} = \frac{f(t)}{g(t)} $$
+and call this assignment $\sigma$ (note that by construction $\max\lbrace \deg(f), \deg(g) \rbrace = 1$). We first show that $\sigma \in \aut(K(t)/K).$ 
+
+To see that $\sigma \in \aut(K(t)/K)$, observe that the above assignment induces a matrix action completely determined by
+$$ t \mapsto \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix},$$
+and hence gives a correspondence allowing us to analyze the structure of $\sigma: K(t) \to K(f/g)$ through the behaviour of
+\[
+(\sigma_{ij}) := \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}.
+\]
+Since $\det(\sigma_{ij}) \ne 0$ by assumption, the $(\sigma_{ij})$ is non-singular and invertible; this then implies that $\gcd_{K[t]}(f,g) = 1$, for otherwise the matrix $(\sigma_{ij})$ would be non-invertible and hence singular, contradicting our assumption that $ad - bc \ne 0$; in order to show this explicitly, assume for the purpose of deriving a contradiction that $\gcd(f,g) \ne 1$ and write $h = \gcd(f,g)$. Note that $h$ has the maximum degree of any divisors of $f$ and $g$. Now, since $\max\lbrace \deg(f), \deg(g)\rbrace = 1$, it follows that $\deg(h) \leq 1$; in fact, if $\deg(h) = 0$, then $h$ is a non-zero constant in $K$ and yields that $1$ is also a gcd of $f$ and $g$. So, since $\gcd(f,g) \ne 1$, take $\deg(h) = 1$. Then $h(t)\alpha = f(t)$ and $h(t)\beta = g(t)$ for some $\alpha,\beta \in K[t]$. Moreover, since $\max\lbrace \deg(f), \deg(g)\rbrace = 1$, this implies that $\deg(f) = 1 = \deg(g)$ and $\alpha, \beta \in K$. Then
+$$ \frac{f(t)}{\alpha} = h(t) = \frac{g(t)}{\beta}.$$ This then allows us to write, with $h(t) = \gamma t+ \delta$,  
+$$ \frac{at + b}{\alpha} =\gamma t + \delta = \frac{ct + d}{\beta}$$
+and hence
+$$ \frac{(\beta a - \alpha c)t + (\beta b - \alpha d)}{\alpha\beta},$$
+implying that $ad - bc = 0$ and yielding a contradiction. 
+
+Now, since $\max\lbrace \deg(f),\deg(g) \rbrace = 1$ and $\gcd(f,g) =1 $, by Lemma \ref{Lemma 3} it follows that $K(t) \cong K(f/g)$ and hence $\sigma \in \aut(K(t)/K)$. 
+
+We now show that any map $\phi \in \aut(K(t)/K)$ takes the form asserted by the lemma. To see this let $\phi \in \aut(K(t)/K)$ be arbitrary. Since $\lbrace t \rbrace$ forms a transcendence base for $K(t)$, any automorphism of $K(t)$ is completely determined by the image of $t$; as such, consider the map $\phi$ by observing the image
+$$ t \mapsto \phi(t).$$
+If $\phi(t) = kt$ for any $k \in K^{\times}$ (note that $\phi$ automorphic forces $k \ne 0$), then we may write the $\phi$ as
+\[ 
+t \mapsto \frac{kt + 0}{0t + 1} \sim \begin{pmatrix}
+k & 0 \\
+0 & 1
+\end{pmatrix}.
+\]
+Assume now that $\phi(t) = f(t)/g(t)$ for some $f, g \in K[t]$. Then, since $\phi \in \aut(K(t)/K)$, Lemma \ref{Lemma 3} forces $\max\lbrace \deg(f),\deg(g)\rbrace = 1$ and hence
+$$ \phi(t) = \frac{at+ b}{ct + d}$$
+for some $a,b,c,d \in K$. Now, since $\phi$ is an automorphism of fields, the matrix
+\[ 
+(\phi_{ij}) = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} 
+\]
+must be non-degenerate; explicitly this claim is given through a contradiction. To see it, assume that $(\phi_{ij})$ is singular. Then $\rank(\phi_{ij}) = 1$ or $\rank(\phi_{ij}) = 0.$ We immediately reject any situation in which the row-reduced form of $(\phi_{ij})$ has top or bottom row containing only zeros, as this then implies that, for some $\alpha, \beta \in K$, 
+\[
+ (\phi_{ij}) \simeq \begin{pmatrix}
+\alpha & \beta \\
+0 & 0
+\end{pmatrix},
+\]
+implying that $t \mapsto f(t)/g(t)$ with $g(t) \equiv 0$, which is not allowed; similarly, 
+\[
+(\sigma_{ij}) \simeq \begin{pmatrix}
+0 & 0 \\
+\alpha & \beta
+\end{pmatrix}
+\]
+implies that $t \mapsto 0/g(t) = 0$ and so $\phi \notin \aut(K(t)/K)$. The only other cases that arise are when $(\phi_{ij})$ row-reduces to either
+\[
+ (\phi_{ij}) = \begin{pmatrix}
+\alpha & 0 \\
+\beta & 0
+\end{pmatrix}
+\]
+or
+\[
+ (\phi_{ij}) = \begin{pmatrix}
+0 & \alpha \\
+0 & \beta
+\end{pmatrix}
+\]
+for some $\alpha, \beta \in K$. The first case may be rejected, as it then implies that $\phi$ takes the form
+$$ t \mapsto \frac{\alpha t}{\beta t} = \frac{\alpha}{\beta},$$
+contradicting that $\phi \in \aut(K(t)/K)$. The second case may be rejected similarly. This shows that if $(\phi_{ij})$ is singular, then $\phi \notin \aut(K(t)/K)$. 
+
+As such, $\det(\phi_{ij}) \ne 0$, and so the lemma is proved.
+\end{proof}
+
+\section{The Examples and Proof (finally)!}
+\begin{Theorem}[\cite{Hungerford}, Exercise V.2.9, p. 256]
+Let $K$ be an infinite field and let $t$ be an indeterminate over $K$. Then $K(t)/K$ is Kaplansky but not algebraic.
+\end{Theorem}
+\begin{proof}
+By Lemma \ref{Lemma 4} $\aut(K(t)/K)$ is infinite, as $K$ infinite implies that there are an infinite number of matrices
+\[
+ (a_{ij}) = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} 
+\]
+with $(a_{ij})$ invertible. We now prove the theorem by contradiction. 
+
+If $K(t)/K$ is not Kaplansky, by Lemma \ref{Lemma 2} $K(t)$ is algebraic over
+$$ L := K(t)^{\aut(K(t)/K)}.$$
+This produces the tower $K(t)/L/K$ with $L/K$ transcendental and by Lemma \ref{Lemma 2} we find $[K(t):L] \in \N$. However, $\aut(K(t)/L) = \aut(K(t)/K)$ and, using $\card(-)$ to denote the cardinality of a set,
+$$ \infty = \card(\aut(K(t)/L)) = \card(\aut(K(t)/K)) \leq [K(t): L] \in \N,$$
+providing us with a contradiction. This shows that $K(t)$ is Kaplansky and hence proves the theorem. 
+\end{proof}
+
+
+\end{document}

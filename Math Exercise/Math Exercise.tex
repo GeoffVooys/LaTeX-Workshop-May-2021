@@ -1,0 +1,34 @@
+\documentclass[10pt]{article}
+\usepackage[alphabetic]{amsrefs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{xy}
+
+
+\numberwithin{Theorem}{section}
+
+
+\title{Math Exercises}
+\author{Geoff Vooys}
+\date{\today}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+In the document below I've written some math down, but it looks ugly. Try to fix it up using what you've learned today!
+
+The ring $A[\frac{x}{z}, \frac{y}{z}]$ for a commuting ring $A$ is helpful for thinking about projective space and the scheme $\mathbb{P}_A^2$.
+
+Integrals are fun as long as we don't have to compute them. I like that for a group $G$ with left Haar measure $\mu$ we can say things like
+\[
+(\int_G f(gx)\,\mathrm{d}\mu(x))^{1/p} = (\int_G f(x)\,\mathrm{d}\mu(x))^{1/p}
+\]
+whenever $p \in (0,\infty)$ but man does it suck to compute these! However, we can use it to say neat things about the Banach spaces $L^p(G,\mu)$ and H{\"o}lder duality. When $p = 1$ we even get that $L^1(G,\mu)$ is a Banach algebra with multiplication given by the convolution $(f \ast g)(x) = \int_G f(y^{-1}x)g(y)\,\mathrm{d}\mu(y)$.
+
+\end{document}

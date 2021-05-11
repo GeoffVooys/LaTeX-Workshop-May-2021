@@ -1,0 +1,43 @@
+\documentclass[10pt]{article}
+\usepackage[alphabetic]{amsrefs}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{xy}
+
+
+\numberwithin{Theorem}{section}
+
+%MAcros
+\DeclareMathOperator{\DbXQl}{\mathnormal{D}_{\mathnormal{c}}^{\mathnormal{b}}(X;\overline{\Q}_{\ell})}
+
+%Commands
+\newcommand{\TalyerExpZero}[1]{asdf}
+
+\title{Macro Exercises}
+\author{Geoff Vooys}
+\date{\today}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+In the document below I've written some math down, but it needs some commands and macros to compile. Please try to fill it in so that it compiles!
+
+The Taylor series expansion of $e^z$ at $z = 0$ on the complex numbers $\C$
+\[
+\TaylorExpZero{z} = e^z
+\]
+let us show that
+\[
+e^{i\theta} = \cos(\theta) + i \sin(\theta).
+\]
+This needs the $\C$-analogue of the power series definitions of $\cos$ and $\sin$ over $\R$, which are much hated by first year calc students the world over. 
+
+It's also worth noting that sometimes your macros can be hella complicated and use other macros! I've made one here that doesn't compile, so please fix it, but it should make something like $D_c^b(X;\overline{\Q}_{\ell})$ where $\Q$ is supposed to be the rational numbers. Also it would be nice if you made a command like \verb|\Db\{\}| which takes an argument $y$ and spits out $D_c^b(y;\overline{\Q}_{\ell})$. 
+
+\end{document}
